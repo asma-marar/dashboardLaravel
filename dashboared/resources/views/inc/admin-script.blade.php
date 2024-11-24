@@ -60,3 +60,65 @@
 </script>
 <script src="{{ asset ('assets/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
 <script src="{{ asset ('assets/js/scripts.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+      $('#exampleTable').DataTable();
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).on('click', '.edit-status-btn', function () {
+    let orderId = $(this).data('id');
+    let currentStatus = $(this).data('status');
+
+    Swal.fire({
+        title: 'Edit Order Status',
+        input: 'select',
+        inputOptions: {
+            pending: 'Pending',
+            processing: 'Processing',
+            delivered: 'Delivered',
+            cancelled: 'Cancelled',
+        },
+        inputValue: currentStatus,
+        showCancelButton: true,
+        confirmButtonText: 'Update',
+        cancelButtonText: 'Cancel',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to select a status!';
+            }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // AJAX call to update the status
+            $.ajax({
+                url: `/admin/update-order-status/${orderId}`,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    status: result.value
+                },
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire('Success', response.message, 'success').then(() => {
+                            location.reload(); // Reload page to reflect changes
+                        });
+                    } else {
+                        Swal.fire('Error', response.message, 'error');
+                    }
+                },
+                error: function () {
+                    Swal.fire('Error', 'An error occurred while updating the status.', 'error');
+                }
+            });
+        }
+    });
+});
+
+</script>
+

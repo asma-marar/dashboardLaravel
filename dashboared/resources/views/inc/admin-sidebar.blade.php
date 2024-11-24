@@ -102,25 +102,20 @@
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#tables">
               <i class="fas fa-table"></i>
-              <p>Tables</p>
+              <p>Orders</p>
               <span class="caret"></span>
             </a>
             <div class="collapse" id="tables">
               <ul class="nav nav-collapse">
                 <li>
-                  <a href="tables/tables.html">
-                    <span class="sub-item">Basic Table</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="tables/datatables.html">
-                    <span class="sub-item">Datatables</span>
+                  <a href="{{ url('admin/order')}}">
+                    <span class="sub-item">View Orders</span>
                   </a>
                 </li>
               </ul>
             </div>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a data-bs-toggle="collapse" href="#maps">
               <i class="fas fa-map-marker-alt"></i>
               <p>Maps</p>
@@ -225,7 +220,7 @@
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> --}}
           </li>
         </ul>
       </div>

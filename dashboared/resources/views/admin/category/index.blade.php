@@ -17,7 +17,7 @@
         </div>
         @endif
 
-        <table class="table table-boardered">
+        <table id="exampleTable" class="table table-boardered">
             <thead>
                 <tr>
                     <th>ID</th>

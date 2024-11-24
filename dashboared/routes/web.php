@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -51,6 +52,11 @@ Route::prefix('admin')->middleware(['auth' , 'isAdmin'])->group(function(){
     Route::get('edit-product/{product_id}', [ProductController::class ,'edit']);
     Route::put('update-product/{product_id}', [ProductController::class, 'update']);
     Route::get('delete-product/{product_id}', [ProductController::class, 'delete']);
+
+    Route::get('order', [OrderController::class, 'index']);
+    Route::post('update-order-status/{order_id}', [OrderController::class, 'updateStatus']);
+    Route::delete('delete-order/{order_id}', [OrderController::class, 'delete']);
+
 
 
 });
